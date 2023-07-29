@@ -2,6 +2,7 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+## 標準セットアップ
 # fnm
 if type -q fnm
     fnm env --use-on-cd --shell fish 2>/dev/null | source
