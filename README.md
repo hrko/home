@@ -12,13 +12,12 @@ My standard home directory setup.
 7. Install [Task](https://taskfile.dev/installation/#build-from-source) using a command: `go install github.com/go-task/task/v3/cmd/task@latest`
 
 ### Modify .profile and .bashrc
-1. `cat .profile_append >> ~/.profile`
-2. `cat .bashrc_append >> ~/.bashrc`
+1. `cp .profile ~/.profile`
+2. `cp .bashrc ~/.bashrc`
 
 ### Fish
 1. `cp -rT .config/fish ~/.config/fish`
-2. `curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-`
+2. `curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher`
 3. `fisher update`
 
 ### Starship
