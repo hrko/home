@@ -19,7 +19,7 @@ tasks:
       - sh: '[ {{OS}} = "linux" ]'
         msg: "This is not a linux system, Halting"
       - sh: fish --version
-        msg: "Fish is not installed. Please install fish"
+        msg: "Fish is not installed. Please install fish ( https://fishshell.com/ )"
       - sh: curl --version
         msg: "curl is not installed. Please install curl"
 
