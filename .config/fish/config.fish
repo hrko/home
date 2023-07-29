@@ -8,6 +8,9 @@ end
 
 ## 標準セットアップ
 
+# グリーティングを表示しない
+set -g fish_greeting
+
 # Fast Node Manager (fnm)
 if type -q fnm
     fnm env --use-on-cd --shell fish 2>/dev/null | source

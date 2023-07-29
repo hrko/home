@@ -16,7 +16,8 @@ My standard home directory setup.
 
 ### Fish package installation
 1. `curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher`
-2. `fisher update`
+2. Rerun `install_files.sh` as Fisher restores `.config/fish/fish_plugins`.
+3. `fisher update`
 
 ### Enable Task completions for Fish
 1. `curl https://github.com/go-task/task/raw/main/completion/fish/task.fish > ~/.config/fish/completions/task.fish`
