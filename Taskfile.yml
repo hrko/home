@@ -1,0 +1,74 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - task: install-rust
+      - task: install-go
+      - task: install-fnm
+      - task: install-starship
+      - task: install-fzf
+      - task: install-task
+      - task: install-fisher
+      - task: install-shell-profiles
+    preconditions:
+      - sh: '[ {{ARCH}} = "amd64" ]'
+        msg: "This is not an amd64 system, Halting"
+      - sh: '[ {{OS}} = "linux" ]'
+        msg: "This is not a linux system, Halting"
+      - sh: fish --version
+        msg: "Fish is not installed. Please install fish"
+
+  install-rust:
+    cmd: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path -y
+  
+  install-go:
+    cmds:
+      - mkdir -p ~/.local
+      - curl -fsSL "https://go.dev/dl/{{.GO_VERSION}}.linux-amd64.tar.gz" | tar -C ~/.local -xzf -
+    vars:
+      GO_VERSION:
+        sh: curl -fsSL 'https://go.dev/VERSION?m=text'
+
+  install-fnm:
+    cmd: curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
+  
+  install-starship:
+    cmds:
+      - mkdir -p ~/.local/bin
+      - curl -fsSL https://starship.rs/install.sh | sh -s -- --yes --bin-dir ~/.local/bin
+      - install -m 644 -b -D ./.config/starship.toml ~/.config/starship.toml
+  
+  install-fzf:
+    cmd: ~/.local/go/bin/go install github.com/junegunn/fzf@latest
+  
+  install-task:
+    cmds: 
+      - ~/.local/go/bin/go install github.com/go-task/task/v3/cmd/task@latest
+      - mkdir -p ~/.config/fish/completions
+      - curl -fsSL {{.TASK_COMP_URL}} > ~/.config/fish/completions/task.fish
+    vars:
+      TASK_COMP_URL: https://github.com/go-task/task/raw/main/completion/fish/task.fish
+
+  install-fisher:
+    cmds:
+      - fish -c "curl -sL {{.FISHER_URL}} | source && fisher install jorgebucaran/fisher"
+      - install -m 644 -b -D ./.config/fish/fish_plugins ~/.config/fish/fish_plugins
+      - fish -c "fisher update"
+    vars:
+      FISHER_URL: https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish
+
+  install-shell-profiles:
+    cmds:
+      - install -m 644 -b -D ./.profile ~/.profile
+      - install -m 644 -b -D ./.bashrc ~/.bashrc
+      - install -m 644 -b -D ./.config/fish/config.fish ~/.config/fish/config.fish
+      - touch ~/.profile.local
+      - touch ~/.bashrc.local
+      - mkdir -p ~/.config/fish/conf.d
+      - touch ~/.config/fish/conf.d/local.fish
