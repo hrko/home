@@ -25,36 +25,36 @@ tasks:
   
   install-fish-ubuntu:
     cmds:
-      - sudo apt install software-properties-common
-      - sudo apt-add-repository ppa:fish-shell/release-3
-      - sudo apt-get update
-      - sudo apt-get install fish
+      - sudo apt -y install software-properties-common
+      - sudo apt-add-repository -y ppa:fish-shell/release-3
+      - sudo apt update
+      - sudo apt -y install fish
   
   install-fish-debian12:
     cmds:
       - echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list
       - curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish_release_3.gpg > /dev/null
       - sudo apt update
-      - sudo apt install fish
+      - sudo apt -y install fish
   
   install-fish-debian11:
     cmds:
       - echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list
       - curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish_release_3.gpg > /dev/null
       - sudo apt update
-      - sudo apt install fish
+      - sudo apt -y install fish
 
   install-fish-centos9_stream:
     cmds:
       - sudo wget {{.REPO_URL}} -O /etc/yum.repos.d/fish.repo
-      - sudo dnf install fish
+      - sudo dnf -y install fish
     vars:
       REPO_URL: https://download.opensuse.org/repositories/shells:fish:release:3/CentOS-9_Stream/shells:fish:release:3.repo
 
   install-fish-centos8:
     cmds:
       - sudo wget {{.REPO_URL}} -O /etc/yum.repos.d/fish.repo
-      - sudo dnf install fish
+      - sudo dnf -y install fish
     vars:
       REPO_URL: https://download.opensuse.org/repositories/shells:fish:release:3/CentOS_8/shells:fish:release:3.repo
 
