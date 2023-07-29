@@ -1,6 +1,8 @@
 #!/bin/sh
 
-## https://github.com/hrko/home/
+# オリジナルは https://github.com/hrko/home/.profile にあります。
+# 手動で書き換えないでください。
+# マシン固有の設定は ~/.profile.local に書いてください。
 
 # ~/bin が存在すれば PATH に追加
 if [ -d "$HOME/bin" ] ; then

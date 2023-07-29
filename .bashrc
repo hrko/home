@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# https://github.com/hrko/home/
+# オリジナルは https://github.com/hrko/home/.bashrc にあります。
+# 手動で書き換えないでください。
+# マシン固有の設定は ~/.bashrc.local に書いてください。
 
 ## Ubuntu 22.04 の /etc/skel/.bashrc よりコピー
 
@@ -127,8 +129,9 @@ if fnm --version &> /dev/null; then
   eval "$(fnm env --use-on-cd --shell bash 2> /dev/null)"
 fi
 
-# プロンプトとウィンドウタイトルのカスタマイズ
+# Starship がインストールされていれば有効化
 if starship --version &> /dev/null; then
+  # ウィンドウタイトル設定関数
   function set_win_title() {
     local ssh=""
     if [[ "$SSH_TTY" ]]; then
@@ -142,12 +145,15 @@ if starship --version &> /dev/null; then
     pwd="$(starship module directory | sed -e 's/\x1b\[[0-9;]*m//g')"
     echo -ne "\033]0;$ssh$cmd$pwd\007"
   }
+  # Starship の設定
   starship_precmd_user_func="set_win_title"
+  # Starship の有効化
   eval "$(starship init bash)"
+  # DEBUG トラップにウィンドウタイトル設定関数を設定
   trap "$(trap -p DEBUG | awk -F"'" '{print $2}')set_win_title \${BASH_COMMAND}" DEBUG
 fi
 
-# VSCodeのシェル統合機能を有効化
+# VSCode 内で起動された場合は、VSCode のシェル統合を有効化
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"
 
 # .bashrc.local があれば読み込む
