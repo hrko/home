@@ -21,7 +21,7 @@ style = "dimmed"
 
 [directory]
 style = "blue"
-read_only = " "
+read_only = " 󰍁"
 truncation_length = 0
 
 [character]
