@@ -22,6 +22,8 @@ tasks:
         msg: "Fish is not installed. Please install fish manually or use the install-fish-* tasks"
       - sh: curl --version
         msg: "curl is not installed. Please install curl"
+      - sh: unzip
+        msg: "unzip is not installed. Please install unzip"
   
   install-fish-ubuntu:
     cmds:
