@@ -69,7 +69,7 @@ tasks:
       - curl -fsSL "https://go.dev/dl/{{.GO_VERSION}}.linux-amd64.tar.gz" | tar -C ~/.local -xzf -
     vars:
       GO_VERSION:
-        sh: curl -fsSL 'https://go.dev/VERSION?m=text'
+        sh: curl -fsSL 'https://go.dev/VERSION?m=text' | head -1
 
   install-fnm:
     cmd: curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
